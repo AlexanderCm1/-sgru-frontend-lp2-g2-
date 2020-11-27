@@ -1,0 +1,81 @@
+<mat-sidenav-container>
+    <mat-sidenav mode="side" [(opened)]="opened">Sidenav</mat-sidenav>
+    <mat-sidenav-content>
+        <button mat-fab (click)="opened=!opened" class="toggle">
+            <mat-icon>label</mat-icon>
+        </button>
+
+        <mat-grid-list cols="3" rowHeight="fit"  gutterSizer="5px" class="list-cards">
+            <mat-grid-tile>
+                <mat-card class="example-card">
+
+                    <img mat-card-image src="../../../assets/images/7.png" alt="Photo of a Shiba Inu">
+
+                    <mat-card-content>
+
+                        <button mat-button [routerLink] = "['/instrumento']">Crear Evaluación de Conocimentos</button>
+
+                    </mat-card-content>
+
+                </mat-card>
+
+
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-card class="example-card">
+
+                    <img mat-card-image src="../../../assets/images/7.png" alt="Photo of a Shiba Inu">
+
+
+
+                    <mat-card-content>
+
+                        <button mat-button>Crear Evaluación de Conocimentos</button>
+
+                    </mat-card-content>
+
+                </mat-card>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-card class="example-card">
+
+                    <img mat-card-image src="../../../assets/images/7.png" alt="Photo of a Shiba Inu">
+
+
+
+                    <mat-card-content>
+
+                        <button mat-button>Crear Evaluación de Conocimentos</button>
+
+                    </mat-card-content>
+
+                </mat-card>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-card class="example-card">
+
+                    <img mat-card-image src="../../../assets/images/7.png" alt="Photo of a Shiba Inu">
+
+
+
+                    <mat-card-content>
+
+                        <button mat-button>Crear Evaluación de Conocimentos</button>
+
+                    </mat-card-content>
+
+                </mat-card>
+            </mat-grid-tile>
+
+
+        </mat-grid-list>
+
+
+
+
+
+
+
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

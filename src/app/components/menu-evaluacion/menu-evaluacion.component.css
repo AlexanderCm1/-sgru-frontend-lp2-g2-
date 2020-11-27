@@ -1,0 +1,23 @@
+mat-sidenav-container{
+    height: 100%;
+}
+mat-sidenav, mat-sidenav-content{
+    padding: 16px;
+}
+
+mat-sidenav{
+    background-color: aquamarine;
+    width: 18%;
+}
+.toggle{
+    margin: 0 0 50px 0;
+}
+.example-card {
+    max-width: 20rem;
+}
+.example-header-image {
+
+}
+.list-cards{
+    height: 100%;
+}
