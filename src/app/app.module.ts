@@ -7,9 +7,12 @@ import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { MenuEvaluacionComponent } from './components/menu-evaluacion/menu-evaluacion.component';
 import { InstrumentoComponent } from './components/instrumento/instrumento.component';
+import { LayoutModule } from '@angular/cdk/layout';
+
+
+
 
 @NgModule({
   declarations: [
@@ -24,9 +27,12 @@ import { InstrumentoComponent } from './components/instrumento/instrumento.compo
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    LayoutModule,
   ],
-  providers: [],
+  providers: [
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

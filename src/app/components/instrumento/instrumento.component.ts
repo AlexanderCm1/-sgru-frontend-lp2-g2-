@@ -11,7 +11,7 @@ import { SemestreService } from '../../services/semestre.service';
 })
 export class InstrumentoComponent implements OnInit {
   selected = 'option2';
-  public semestres: Semestre[] = [];
+  public semestres: Semestre[];
 
   constructor
   (

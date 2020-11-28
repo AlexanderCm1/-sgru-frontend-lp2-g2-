@@ -1,81 +1,36 @@
-<mat-sidenav-container>
-    <mat-sidenav mode="side" [(opened)]="opened">Sidenav</mat-sidenav>
-    <mat-sidenav-content>
-        <button mat-fab (click)="opened=!opened" class="toggle">
-            <mat-icon>label</mat-icon>
-        </button>
-
-        <mat-grid-list cols="3" rowHeight="fit"  gutterSizer="5px" class="list-cards">
-            <mat-grid-tile>
-                <mat-card class="example-card">
-
-                    <img mat-card-image src="../../../assets/images/7.png" alt="Photo of a Shiba Inu">
-
-                    <mat-card-content>
-
-                        <button mat-button [routerLink] = "['/instrumento']">Crear Evaluación de Conocimentos</button>
-
-                    </mat-card-content>
-
-                </mat-card>
+<mat-toolbar color="primary" class="example-toolbar">
+	<button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
+	<h1 class="example-app-name">Nested Menus</h1>
+</mat-toolbar>
 
 
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <mat-card class="example-card">
+<mat-sidenav-container class="example-container" autosize>
+	<mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
+		<mat-nav-list>
+			<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Parent Menu</span>
+				<mat-icon mat-list-icon>home</mat-icon>
+				<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+			</mat-list-item>
+			<div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+				<a mat-list-item href="...">Submenu Item 1</a>
+				<a mat-list-item href="...">Submenu Item 2</a>
+				<mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
+					<span class="full-width" *ngIf="isExpanded || isShowing">Nested Menu</span>
+					<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+				</mat-list-item>
+				<div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing || isExpanded">
+					<mat-list-item>SubSubmenu Item 1</mat-list-item>
+					<mat-list-item>SubSubmenu Item 2</mat-list-item>
+				</div>
+			</div>
+		</mat-nav-list>
+    <mat-nav-list>
+</mat-nav-list>
+	</mat-sidenav>
 
-                    <img mat-card-image src="../../../assets/images/7.png" alt="Photo of a Shiba Inu">
+	<div class="example-sidenav-content">
+		Main content that resizes properly
+	</div>
 
-
-
-                    <mat-card-content>
-
-                        <button mat-button>Crear Evaluación de Conocimentos</button>
-
-                    </mat-card-content>
-
-                </mat-card>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <mat-card class="example-card">
-
-                    <img mat-card-image src="../../../assets/images/7.png" alt="Photo of a Shiba Inu">
-
-
-
-                    <mat-card-content>
-
-                        <button mat-button>Crear Evaluación de Conocimentos</button>
-
-                    </mat-card-content>
-
-                </mat-card>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <mat-card class="example-card">
-
-                    <img mat-card-image src="../../../assets/images/7.png" alt="Photo of a Shiba Inu">
-
-
-
-                    <mat-card-content>
-
-                        <button mat-button>Crear Evaluación de Conocimentos</button>
-
-                    </mat-card-content>
-
-                </mat-card>
-            </mat-grid-tile>
-
-
-        </mat-grid-list>
-
-
-
-
-
-
-
-
-    </mat-sidenav-content>
 </mat-sidenav-container>

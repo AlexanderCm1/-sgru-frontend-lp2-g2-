@@ -1,23 +1,33 @@
-mat-sidenav-container{
-    height: 100%;
+.example-container {
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
-mat-sidenav, mat-sidenav-content{
-    padding: 16px;
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
-
-mat-sidenav{
-    background-color: aquamarine;
-    width: 18%;
+.example-sidenav {
+   user-select: none;
 }
-.toggle{
-    margin: 0 0 50px 0;
+.full-width {
+  width: 100%;
 }
-.example-card {
-    max-width: 20rem;
+.menu-button {
+  transition: 300ms ease-in-out;
+  transform: rotate(0deg);
 }
-.example-header-image {
-
+.menu-button.rotated {
+  transform: rotate(180deg);
 }
-.list-cards{
-    height: 100%;
+.submenu {
+  overflow-y: hidden;
+  transition: transform 300ms ease;
+  transform: scaleY(0);
+  transform-origin: top;
+  padding-left: 30px;
+}
+.submenu.expanded {
+  transform: scaleY(1);
 }
