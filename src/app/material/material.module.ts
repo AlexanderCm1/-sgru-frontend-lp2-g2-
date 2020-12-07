@@ -7,9 +7,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import {MatSelectModule} from '@angular/material/select'; 
 import {MatMenuModule} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 const MaterialComponents = 
@@ -23,6 +23,8 @@ const MaterialComponents =
   MatMenuModule,
   MatToolbarModule,
   MatListModule,
+  MatDialogModule,
+  MatFormFieldModule
 
 ];
 

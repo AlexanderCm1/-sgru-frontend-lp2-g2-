@@ -10,6 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MenuEvaluacionComponent } from './components/menu-evaluacion/menu-evaluacion.component';
 import { InstrumentoComponent } from './components/instrumento/instrumento.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { CreateInstrumentoComponent } from './components/instrumento/create-instrumento/create-instrumento.component';
+import { DetailInstrumentoComponent } from './components/instrumento/detail-instrumento/detail-instrumento.component';
+import {ToastrModule} from 'ngx-toastr';
+
 
 
 
@@ -18,7 +22,9 @@ import { LayoutModule } from '@angular/cdk/layout';
   declarations: [
     AppComponent,
     MenuEvaluacionComponent,
-    InstrumentoComponent
+    InstrumentoComponent,
+    CreateInstrumentoComponent,
+    DetailInstrumentoComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +35,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MaterialModule,
     HttpClientModule,
     LayoutModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     

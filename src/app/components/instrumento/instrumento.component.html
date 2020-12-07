@@ -1,86 +1,151 @@
+<!--mat-toolbar class="toolbar">
+	<button mat-icon-button (click)= "isExpanded = !isExpanded;
+	isExpanded1 = !isExpanded1; 
+	isExpanded2 = !isExpanded2; 
+	isExpanded3 = !isExpanded3;
+	isExpanded4 = !isExpanded4; ">
+		<mat-icon>menu</mat-icon>
+	</button>
+
+
+	<img src="../../../assets/images/logo-upeu-blanco.png" alt="">
+
+
+</mat-toolbar>
+
+
+<mat-sidenav-container class="e-container" autosize>
+	<mat-sidenav #sidenav class="e-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
+		(mouseleave)="mouseleave()">
+		<mat-nav-list>
+
+			<mat-list-item (click)= "showSubmenu = !showSubmenu;"   class= "parent">
+				<span class="full-width" *ngIf= "isExpanded || isShowing">Usuario</span>
+				<mat-icon mat-list-icon>supervised_user_circle</mat-icon>
+				<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubmenu}" *ngIf= "isExpanded || isShowing">
+					expand_more</mat-icon>
+
+			</mat-list-item>
+
+			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu }" *ngIf= "isShowing || isExpanded" >
+				<img src="../../../assets/images/usuario.png" alt="">
+
+				<p>Bienvenida Sanny</p>
+				<p>EP Sistemas</p>
+				<p>Semestre 2020-II</p>
+
+				<a mat-list-item href="...">Cerrar sesion</a>
+
+
+				<mat-list-item (click)= "showSubSubMenu = !showSubSubMenu" class="parent">
+					<span class="full-width" *ngIf= "isExpanded || isShowing">Configuración</span>
+					<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubSubMenu}"
+						*ngIf="isExpanded || isShowing">expand_more</mat-icon>
+				</mat-list-item>
+
+
+				<div class="submenu" [ngStyle]= "{'display': showSubSubMenu ? 'block':''}" [ngClass]= "{'expanded' : showSubSubMenu}" *ngIf= "isShowing || isExpanded">
+					<mat-list-item>Perfil de usuario</mat-list-item>
+					<mat-list-item>Contraseña</mat-list-item>
+				</div>
+				
+			</div>
+
+
+
+		</mat-nav-list>
+		<mat-nav-list>
+
+			<mat-list-item (click)= "showSubmenu1 = !showSubmenu1;"   class= "parent">
+				<span class="full-width" *ngIf= "isExpanded1 || isShowing1">Planificación</span>
+				<mat-icon mat-list-icon>emoji_objects</mat-icon>
+				<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubmenu1}" *ngIf= "isExpanded1 || isShowing1">expand_more</mat-icon>
+			</mat-list-item>
+			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu1 ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu1 }" *ngIf= "isShowing1 || isExpanded1" >
+				
+
+				<!--mat-list-item (click)= "showSubSubMenu1 = !showSubSubMenu1" class="parent">
+					<span class="full-width" *ngIf= "isExpanded1 || isShowing1">Prueba</span>
+					<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubSubMenu1}"
+						*ngIf= "isExpanded1 || isShowing1">expand_more</mat-icon>
+				</mat-list-item>
+				<div class="submenu" [ngStyle]= "{'display': showSubSubMenu1 ? 'block':''}" [ngClass]= "{'expanded' : showSubSubMenu1}" *ngIf= "isShowing1 || isExpanded1">
+					<mat-list-item>Perfil de usuario</mat-list-item>
+					<mat-list-item>Contraseña</mat-list-item>
+				</div >
+
+				<a mat-list-item href="...">Programa Acádemico</a>
+				<a mat-list-item href="...">Lineas de Programa Acádemico</a>
+				<a mat-list-item href="...">Cursos</a>
+				<a mat-list-item href="...">Docentes</a>
+
+
+			
+			</div>
+
+
+
+		</mat-nav-list>
+		<mat-nav-list>
+			<mat-list-item (click)= "showSubmenu2 = !showSubmenu2;"   class= "parent">
+				<span class="full-width" *ngIf= "isExpanded2 || isShowing2">Proyectos Integradores</span>
+				<mat-icon mat-list-icon>work</mat-icon>
+				<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubmenu2}" *ngIf= "isExpanded2 || isShowing2">expand_more</mat-icon>
+			</mat-list-item>
+			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu2 ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu2 }" *ngIf= "isShowing2 || isExpanded2" >
+				<a mat-list-item href="...">Registrar Proyecto Integrador</a>
+				<a mat-list-item href="...">Grupos de Proyecto integrador</a>
+				<a mat-list-item href="...">Estudiantes Participando</a>
+				<a mat-list-item href="...">Rubricas de Proyecto Integrador</a>
+				<a mat-list-item href="...">Validar Rubricas</a>
+
+
+			</div>
+
+
+		</mat-nav-list>
+		<mat-nav-list>
+			<mat-list-item (click)= "showSubmenu3 = !showSubmenu3;"   class= "parent">
+				<span class="full-width" *ngIf= "isExpanded3 || isShowing3">Evaluación</span>
+				<mat-icon mat-list-icon>content_paste</mat-icon>
+				<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubmenu3}" *ngIf= "isExpanded3 || isShowing3">expand_more</mat-icon>
+			</mat-list-item>
+			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu3 ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu3 }" *ngIf= "isShowing3 || isExpanded3" >
+				<a mat-list-item href="...">Avances de Proyecto Integrador</a>
+				<a mat-list-item href="...">Evaluar Rubricas</a>
+				<a mat-list-item [routerLink] = "['/instrumentos']">Examen de conocimientos</a>
+				<a mat-list-item href="...">Resultados de Evaluación</a>
+
+
+			</div>
+
+		</mat-nav-list>
+
+
+		<mat-nav-list>
+			<mat-list-item (click)= "showSubmenu4 = !showSubmenu4;"   class= "parent">
+				<span class="full-width" *ngIf= "isExpanded4 || isShowing4">Informes</span>
+				<mat-icon mat-list-icon>receipt_long</mat-icon>
+				<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubmenu4}" *ngIf= "isExpanded4 || isShowing4">expand_more</mat-icon>
+			</mat-list-item>
+			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu4 ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu4 }" *ngIf= "isShowing4 || isExpanded4" >
+				<a mat-list-item href="...">Generar Informes</a>
+				<a mat-list-item href="...">Reporte de Informes </a>
+
+
+			</div>
+
+		</mat-nav-list>
+
+		
+	</mat-sidenav>
+
 <div class="container">
-    <div class="row">
-      
-      <div class="col m8 offset-m2 s12">
-        <h2 class="blue-text text-lighten-2">Your Forms</h2>
-
-        <mat-form-field appearance="fill">
-
-          <mat-label>Semestre</mat-label>
-          <mat-select [(value)]="selected">
-            <mat-option *ngFor= "let semestre of semestres" [value]= "semestre.semestre_id" >
-              {{semestre.nombre}}
-            </mat-option>
-
-          </mat-select>
+	
+</div>
 
 
+	<app-create-instrumento *ngIf= "this.ruta == '/instrumentos'"></app-create-instrumento>
+	<app-detail-instrumento *ngIf= "this.ruta == '/instrumento/6'"></app-detail-instrumento>
 
-        </mat-form-field>
-
-        <a class="btn-floating btn-large waves-effect waves-lightred blue lighten-2 pulse" >
-        </a>
-        <div>
-            
-          <div class="card" >
-              <div class="card-content">
-                
-                <div class="row form">
-                  <div class="col m9 s12">
-                    <div class="row title-box">
-                      <div class="col m8 s12">
-                        <h5 class="title"> titulo </h5>
-                      </div>
-      
-                      <div class="col m4 s12">
-                        <div class="row  valign-wrapper">
-                          <div class="col s6">
-                            <!--app-active [form]="form"></app-active-->
-                          </div>
-      
-                          <div class="col m6">
-                            <a href="#" class="grey-text" >
-                              eliminar
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-      
-                    </div>
-      
-                    <div class="row">
-                      <div class="col m12">
-                        <p class="description grey-text"> Descripcion</p>
-                      </div>
-                    </div>
-      
-                  </div>
-      
-                  <div class="col m3 s12 center">
-                    <div class="col m12 s6">
-                      <div class="row">
-                        <a class="btn light-green" >Edit</a>
-                      </div>
-                    </div>
-      
-                    <div class="col m12 s6">
-                      <div class="row">
-                        <a class="btn blue center" >Answers</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-      
-              </div>
-            </div>
-        
-        </div>
-  
-      </div>
-  
-    </div>
-  </div>
-  
-  <div class="fixed-action-btn">
-
-  </div>
+</mat-sidenav-container -->

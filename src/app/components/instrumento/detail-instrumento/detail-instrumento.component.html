@@ -1,0 +1,47 @@
+<div class="card" >
+    <div class="card-content">
+      
+      <form #q="ngForm" (ngSubmit)= "onSubmit(q)">
+  
+        <div class="question">
+          <div class="row">
+            
+            <div class="col m12 input-field">
+              <textarea name="title" class="materialize-textarea" placeholder="Your Question"   required></textarea>
+              
+            </div>
+  
+          </div>
+  
+          <div class="row valign-wrapper">
+  
+  
+            <div class="col m3 offset-m1 center-align">
+              <div class="switch">
+                <span class="required_label">Required</span>
+                <label>
+                  <input type="checkbox" id="switch-id"  name="required">
+                  <span class="lever"></span>
+                </label>
+              </div>
+            </div>
+  
+            <div class="col m1" >
+              <a href="#" class="grey-text" (click)= "deleteQuestion()">
+                <i class="mdi mdi-delete small remove_icon"></i>
+              </a>
+            </div>
+  
+  
+            <div class="col m3 right">
+              <button [disabled]="!q.valid" class="btn blue lighten-2" >Create</button>
+              <button [disabled]="!q.valid" class="btn blue lighten-2" >Update</button>
+            </div>
+          </div>
+  
+        </div>
+  
+      </form>
+  
+    </div>
+  </div>

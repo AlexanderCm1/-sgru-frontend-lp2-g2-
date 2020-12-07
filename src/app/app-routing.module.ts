@@ -3,10 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { InstrumentoComponent } from './components/instrumento/instrumento.component';
 import { MenuEvaluacionComponent } from './components/menu-evaluacion/menu-evaluacion.component';
-const routes: Routes = [
+import { CreateInstrumentoComponent } from './components/instrumento/create-instrumento/create-instrumento.component';
+import { DetailInstrumentoComponent } from './components/instrumento/detail-instrumento/detail-instrumento.component';
 
-  {path : 'instrumento', component: InstrumentoComponent},
-  {path: '', component: MenuEvaluacionComponent}
+
+const routes: Routes = [
+  {path: '', component: MenuEvaluacionComponent},
+  {path: 'instrumentos', component: InstrumentoComponent},
+  {path: 'instrumento/create', component:CreateInstrumentoComponent},
+  {path: 'instrumento/:id',component:DetailInstrumentoComponent}
+
 
 ];
 

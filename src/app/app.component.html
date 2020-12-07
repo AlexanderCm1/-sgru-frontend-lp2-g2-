@@ -1,4 +1,158 @@
-<router-outlet></router-outlet>
+<mat-toolbar class="toolbar">
+	<button mat-icon-button (click)= "isExpanded = !isExpanded;
+	isExpanded1 = !isExpanded1; 
+	isExpanded2 = !isExpanded2; 
+	isExpanded3 = !isExpanded3;
+	isExpanded4 = !isExpanded4; ">
+		<mat-icon>menu</mat-icon>
+	</button>
+
+
+	<img src="../../../assets/images/logo-upeu-blanco.png" alt="">
+
+
+</mat-toolbar>
+
+
+<mat-sidenav-container class="e-container" autosize>
+	<mat-sidenav #sidenav class="e-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
+		(mouseleave)="mouseleave()">
+		<mat-nav-list>
+
+			<mat-list-item (click)= "showSubmenu = !showSubmenu;"   class= "parent">
+				<span class="full-width" *ngIf= "isExpanded || isShowing">Usuario</span>
+				<mat-icon mat-list-icon>supervised_user_circle</mat-icon>
+				<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubmenu}" *ngIf= "isExpanded || isShowing">
+					expand_more</mat-icon>
+
+			</mat-list-item>
+
+			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu }" *ngIf= "isShowing || isExpanded" >
+				<img src="../../../assets/images/usuario.png" alt="">
+
+				<p>Bienvenida Sanny</p>
+				<p>EP Sistemas</p>
+				<p>Semestre 2020-II</p>
+
+				<a mat-list-item href="...">Cerrar sesion</a>
+
+
+				<mat-list-item (click)= "showSubSubMenu = !showSubSubMenu" class="parent">
+					<span class="full-width" *ngIf= "isExpanded || isShowing">Configuración</span>
+					<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubSubMenu}"
+						*ngIf="isExpanded || isShowing">expand_more</mat-icon>
+				</mat-list-item>
+
+
+				<div class="submenu" [ngStyle]= "{'display': showSubSubMenu ? 'block':''}" [ngClass]= "{'expanded' : showSubSubMenu}" *ngIf= "isShowing || isExpanded">
+					<mat-list-item>Perfil de usuario</mat-list-item>
+					<mat-list-item>Contraseña</mat-list-item>
+				</div>
+				
+			</div>
+
+
+
+		</mat-nav-list>
+		<mat-nav-list>
+
+			<mat-list-item (click)= "showSubmenu1 = !showSubmenu1;"   class= "parent">
+				<span class="full-width" *ngIf= "isExpanded1 || isShowing1">Planificación</span>
+				<mat-icon mat-list-icon>emoji_objects</mat-icon>
+				<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubmenu1}" *ngIf= "isExpanded1 || isShowing1">expand_more</mat-icon>
+			</mat-list-item>
+			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu1 ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu1 }" *ngIf= "isShowing1 || isExpanded1" >
+				
+
+				<!--mat-list-item (click)= "showSubSubMenu1 = !showSubSubMenu1" class="parent">
+					<span class="full-width" *ngIf= "isExpanded1 || isShowing1">Prueba</span>
+					<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubSubMenu1}"
+						*ngIf= "isExpanded1 || isShowing1">expand_more</mat-icon>
+				</mat-list-item>
+				<div class="submenu" [ngStyle]= "{'display': showSubSubMenu1 ? 'block':''}" [ngClass]= "{'expanded' : showSubSubMenu1}" *ngIf= "isShowing1 || isExpanded1">
+					<mat-list-item>Perfil de usuario</mat-list-item>
+					<mat-list-item>Contraseña</mat-list-item>
+				</div -->
+
+				<a mat-list-item href="...">Programa Acádemico</a>
+				<a mat-list-item href="...">Lineas de Programa Acádemico</a>
+				<a mat-list-item href="...">Cursos</a>
+				<a mat-list-item href="...">Docentes</a>
+
+
+			
+			</div>
+
+
+
+		</mat-nav-list>
+		<mat-nav-list>
+			<mat-list-item (click)= "showSubmenu2 = !showSubmenu2;"   class= "parent">
+				<span class="full-width" *ngIf= "isExpanded2 || isShowing2">Proyectos Integradores</span>
+				<mat-icon mat-list-icon>work</mat-icon>
+				<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubmenu2}" *ngIf= "isExpanded2 || isShowing2">expand_more</mat-icon>
+			</mat-list-item>
+			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu2 ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu2 }" *ngIf= "isShowing2 || isExpanded2" >
+				<a mat-list-item href="...">Registrar Proyecto Integrador</a>
+				<a mat-list-item href="...">Grupos de Proyecto integrador</a>
+				<a mat-list-item href="...">Estudiantes Participando</a>
+				<a mat-list-item href="...">Rubricas de Proyecto Integrador</a>
+				<a mat-list-item href="...">Validar Rubricas</a>
+
+
+			</div>
+
+
+		</mat-nav-list>
+		<mat-nav-list>
+			<mat-list-item (click)= "showSubmenu3 = !showSubmenu3;"   class= "parent">
+				<span class="full-width" *ngIf= "isExpanded3 || isShowing3">Evaluación</span>
+				<mat-icon mat-list-icon>content_paste</mat-icon>
+				<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubmenu3}" *ngIf= "isExpanded3 || isShowing3">expand_more</mat-icon>
+			</mat-list-item>
+			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu3 ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu3 }" *ngIf= "isShowing3 || isExpanded3" >
+				<a mat-list-item href="...">Avances de Proyecto Integrador</a>
+				<a mat-list-item href="...">Evaluar Rubricas</a>
+				<a mat-list-item [routerLink] = "['/instrumento/create']">Examen de conocimientos</a>
+				<a mat-list-item href="...">Resultados de Evaluación</a>
+
+
+			</div>
+
+		</mat-nav-list>
+
+
+		<mat-nav-list>
+			<mat-list-item (click)= "showSubmenu4 = !showSubmenu4;"   class= "parent">
+				<span class="full-width" *ngIf= "isExpanded4 || isShowing4">Informes</span>
+				<mat-icon mat-list-icon>receipt_long</mat-icon>
+				<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubmenu4}" *ngIf= "isExpanded4 || isShowing4">expand_more</mat-icon>
+			</mat-list-item>
+			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu4 ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu4 }" *ngIf= "isShowing4 || isExpanded4" >
+				<a mat-list-item href="...">Generar Informes</a>
+				<a mat-list-item href="...">Reporte de Informes </a>
+
+
+			</div>
+
+		</mat-nav-list>
+
+		
+	</mat-sidenav>
+
+<div class="container">
+    <router-outlet></router-outlet>
+
+</div>
+
+
+
+
+
+</mat-sidenav-container>
+
+
+
 
 
 
