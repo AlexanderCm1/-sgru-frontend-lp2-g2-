@@ -9,8 +9,12 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
-import {MatFormFieldModule} from '@angular/material/form-field';
-
+import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatStepperModule } from '@angular/material/stepper';
 
 const MaterialComponents = 
 [ 
@@ -24,7 +28,13 @@ const MaterialComponents =
   MatToolbarModule,
   MatListModule,
   MatDialogModule,
-  MatFormFieldModule
+  MatFormFieldModule,  
+  MatInputModule,
+  MatDividerModule,
+  MatSlideToggleModule,
+  MatCheckboxModule,
+  MatStepperModule
+  
 
 ];
 

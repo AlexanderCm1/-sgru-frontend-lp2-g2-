@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component ,OnInit,ViewChild} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -6,14 +6,12 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { element } from 'protractor';
 import { Router,ActivatedRoute } from '@angular/router';
 
-
 @Component({
-  selector: 'app-menu-evaluacion',
-  templateUrl: './menu-evaluacion.component.html',
-  styleUrls: ['./menu-evaluacion.component.css']
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css']
 })
-export class MenuEvaluacionComponent implements OnInit {
-
+export class MenuComponent implements OnInit {
   opened = false;
   @ViewChild('sidenav') sidenav:MatSidenav;
   isExpanded = false;
@@ -109,7 +107,3 @@ export class MenuEvaluacionComponent implements OnInit {
   }
 
 }
-
-
-
-

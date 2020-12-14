@@ -13,7 +13,13 @@ import { InstrumentoService } from '../../../services/instrumento.service';
 import { MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { NgForm } from '@angular/forms';
+import Swal from 'sweetalert2'; 
+
+
+
 import { EMPTY } from 'rxjs';
+import { error } from 'protractor';
+import { formatCurrency } from '@angular/common';
 
 
 @Component({
@@ -125,11 +131,21 @@ export class CreateInstrumentoComponent implements OnInit {
           console.log(this.instrumento);
           this._instrumentoService.createInstrumento(this.instrumento).subscribe(
             response =>{
+
               console.log(response);
-                this.getInstrumentos(response.semestre_id);
-                
+              this.getInstrumentos(response.semestre_id);
+              Swal.fire({
+                icon: 'success',
+                title: 'Instrumento Creando Correctamente',
+                showConfirmButton: false,
+                timer: 1500
+              })
               
+            },
+            error =>{
+
             }
+            
   
           )
           form.reset();
@@ -144,6 +160,13 @@ export class CreateInstrumentoComponent implements OnInit {
           response =>{
               console.log(response);
               this.getInstrumentos(response.semestre_id);
+              this.getInstrumentos(response.semestre_id);
+              Swal.fire({
+                icon: 'success',
+                title: 'Editado Correctamente',
+                showConfirmButton: false,
+                timer: 1500
+              })
           },
           error =>{
 
@@ -155,6 +178,54 @@ export class CreateInstrumentoComponent implements OnInit {
       }
       
     }
+    resetAll(form){
+      form.reset();
+      this.instrumento.instrumento_id = null;
+      this.dialog.closeAll();
+    }
+    deleteInstrumento(id){
+        console.log(id);
+
+        Swal.fire({
+          title: '¿Estas seguro?',
+          text: "No podras revertir este cambio",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Eliminar'
+        }).then((result) => {
+          
+          if (result.isConfirmed) {
+
+            this._instrumentoService.deleteInstrumento(id).subscribe(
+              response =>{
+                Swal.fire(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+                )
+                console.log(response);
+                this._instrumentoService.getInstrumentosxsem(this.semestre_id).subscribe(
+                  ({instrumentos}) =>{
+                    this.instrumentos = instrumentos;
+                  },
+                  error =>{
+    
+                  }
+                )
+              },
+              error =>{
+    
+              }
+            )
+
+          }
+        })
+
+
+  
+    }
   
   
     /* Servicios */
@@ -164,6 +235,7 @@ export class CreateInstrumentoComponent implements OnInit {
           if(response.instrumentos)
           this.instrumentos = response.instrumentos;
           console.log(response.instrumentos);
+          
   
         },
         error =>{

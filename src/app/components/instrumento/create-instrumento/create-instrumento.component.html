@@ -48,8 +48,8 @@
                 <input matInput type="text"  name="semestre_id" #semestre_id [(ngModel)] = "selectedSem" class="nopofavor">
                 <input matInput type="text"   name="cl_id"  #cl_id  [(ngModel)]= "selectedCl " class="nopofavor">
                 <input type="text" name="nada" [(ngModel)] = "selectedL" class="nopofavor">
-                <input matInput type="text"  placeholder="Titulo" name="titulo" #titulo  [(ngModel)] = "instrumento.titulo" >
-                <input matInput type="text"  placeholder="Descripción"   name="descripcion" #descripcion [(ngModel)] = "instrumento.descripcion">
+                <input matInput type="text"  placeholder="Titulo" name="titulo" #titulo  [(ngModel)] = "instrumento.titulo" required>
+                <input matInput type="text"  placeholder="Descripción"   name="descripcion" #descripcion [(ngModel)] = "instrumento.descripcion" required>
   
                 <mat-form-field>
                   <mat-label>Ciclo</mat-label>
@@ -86,7 +86,7 @@
                       <div class="row  valign-wrapper">
                      
                         <div class="col m6">
-                          <a href="#" class="red-text text-darken-4">
+                          <a style="cursor: pointer;" class="red-text text-darken-4" (click)="deleteInstrumento(instrumento.instrumento_id)">
                            <mat-icon>delete</mat-icon>
                           </a>
                         </div>
@@ -193,7 +193,4 @@
   
     </div>
   
-  <div class="fixed-action-btn">
-  
-  </div>
   

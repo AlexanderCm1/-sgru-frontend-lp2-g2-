@@ -1,11 +1,11 @@
 export class Pregunta{
     constructor
     (
-        pregunta_id:number,
-        instrumento_id:number,
-        nombre:string,
-        peso:number,
-        estado:string
+      public  pregunta_id:number,
+      public  instrumento_id:number,
+      public  nombre:string,
+      public  peso:number,
+      public  estado:string
 
     ){
 

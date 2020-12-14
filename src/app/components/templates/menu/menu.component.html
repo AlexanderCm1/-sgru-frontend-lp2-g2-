@@ -1,4 +1,4 @@
-<!--mat-toolbar class="toolbar">
+<mat-toolbar class="toolbar">
 	<button mat-icon-button (click)= "isExpanded = !isExpanded;
 	isExpanded1 = !isExpanded1; 
 	isExpanded2 = !isExpanded2; 
@@ -64,7 +64,7 @@
 			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu1 ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu1 }" *ngIf= "isShowing1 || isExpanded1" >
 				
 
-				<--mat-list-item (click)= "showSubSubMenu1 = !showSubSubMenu1" class="parent">
+				<!--mat-list-item (click)= "showSubSubMenu1 = !showSubSubMenu1" class="parent">
 					<span class="full-width" *ngIf= "isExpanded1 || isShowing1">Prueba</span>
 					<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubSubMenu1}"
 						*ngIf= "isExpanded1 || isShowing1">expand_more</mat-icon>
@@ -72,7 +72,7 @@
 				<div class="submenu" [ngStyle]= "{'display': showSubSubMenu1 ? 'block':''}" [ngClass]= "{'expanded' : showSubSubMenu1}" *ngIf= "isShowing1 || isExpanded1">
 					<mat-list-item>Perfil de usuario</mat-list-item>
 					<mat-list-item>Contraseña</mat-list-item>
-				</div >
+				</div -->
 
 				<a mat-list-item href="...">Programa Acádemico</a>
 				<a mat-list-item href="...">Lineas de Programa Acádemico</a>
@@ -113,7 +113,7 @@
 			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu3 ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu3 }" *ngIf= "isShowing3 || isExpanded3" >
 				<a mat-list-item href="...">Avances de Proyecto Integrador</a>
 				<a mat-list-item href="...">Evaluar Rubricas</a>
-				<a mat-list-item [routerLink] = "['/instrumentos']">Examen de conocimientos</a>
+				<a mat-list-item [routerLink] = "['/instrumento/create']">Examen de conocimientos</a>
 				<a mat-list-item href="...">Resultados de Evaluación</a>
 
 
@@ -139,14 +139,22 @@
 
 		
 	</mat-sidenav>
-
-<div class="container">
-	
-</div>
-
-
-	<app-create-instrumento *ngIf= "this.ruta == '/instrumentos'"></app-create-instrumento>
-	<app-detail-instrumento *ngIf= "this.ruta == '/instrumento/:id'"></app-detail-instrumento>
+    <mat-sidenav-content>
+        <div class="container">
+            <router-outlet></router-outlet>
+        
+        </div>
+      </mat-sidenav-content>
 
 
-</mat-sidenav-container -->
+
+
+
+
+</mat-sidenav-container>
+
+
+
+
+
+

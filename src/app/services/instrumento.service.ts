@@ -3,6 +3,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Global } from './global';
 import { Instrumento } from '../models/instrumento';
+import { NumberInput } from '@angular/cdk/coercion';
 
 @Injectable({
     providedIn: 'root'
@@ -36,5 +37,9 @@ export class InstrumentoService{
         let headers = new HttpHeaders().set('Content-Type','application/json');
 
         return this._http.put(this.url+'instrumento/'+instrumento.instrumento_id ,params,{headers:headers})
+    }
+    deleteInstrumento(id:number):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type','application/json');
+        return this._http.delete(this.url+'instrumento/'+id,{headers:headers});
     }
 }

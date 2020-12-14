@@ -7,12 +7,14 @@ import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import { MenuEvaluacionComponent } from './components/menu-evaluacion/menu-evaluacion.component';
 import { InstrumentoComponent } from './components/instrumento/instrumento.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CreateInstrumentoComponent } from './components/instrumento/create-instrumento/create-instrumento.component';
 import { DetailInstrumentoComponent } from './components/instrumento/detail-instrumento/detail-instrumento.component';
 import {ToastrModule} from 'ngx-toastr';
+import { AlternativaInstrumentoComponent } from './components/instrumento/alternativa-instrumento/alternativa-instrumento.component';
+import { PreguntaInstrumentoComponent } from './components/instrumento/pregunta-instrumento/pregunta-instrumento.component';
+import { MenuComponent } from './components/templates/menu/menu.component';
 
 
 
@@ -21,10 +23,12 @@ import {ToastrModule} from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
-    MenuEvaluacionComponent,
     InstrumentoComponent,
     CreateInstrumentoComponent,
     DetailInstrumentoComponent,
+    AlternativaInstrumentoComponent,
+    PreguntaInstrumentoComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,8 @@ import {ToastrModule} from 'ngx-toastr';
     MaterialModule,
     HttpClientModule,
     LayoutModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    
   ],
   providers: [
     
