@@ -6,7 +6,7 @@
         <mat-form-field appearance="fill">
   
           <mat-label>Semestre</mat-label>
-          <mat-select [(value)]= "selectedSem" (selectionChange)= "onChangeSemestre($event.value)">
+          <mat-select [(value)]= "instrumento.semestre_id" (selectionChange)= "onChangeSemestre($event.value)">
             <mat-option *ngFor= "let semestre of semestres" [value]= "semestre.semestre_id">
               {{semestre.nombre}}
             </mat-option>
@@ -27,7 +27,7 @@
         
         <mat-form-field appearance = "fill" *ngIf = "linea_id != null" class="competencia">
           <mat-label>Competencias</mat-label>
-          <mat-select [(value)] = "selectedCl" (selectionChange) = "onChangeCl($event.value)">
+          <mat-select [(value)] = "instrumento.cl_id" (selectionChange) = "onChangeCl($event.value)">
             <mat-option *ngFor= "let competencia of competencias"  [value]= "competencia.cl_id" >
               {{competencia.competencia}}
             </mat-option>
@@ -42,18 +42,35 @@
         </a>
   
         <ng-template #callDialog>
-          <form #instrumentoForm="ngForm" (ngSubmit)= "onSend(instrumentoForm)">
+          <form  [formGroup]="instrumentoFormGroup" #instrumentoForm="ngForm" (ngSubmit)= "onSend(instrumentoForm)">
               <h2 mat-dialog-title>Crea tu formulario</h2>
-                <input type="text" name="instrumento_id" #instrumento_id [(ngModel)] = "instrumento.instrumento_id" class="nopofavor">
-                <input matInput type="text"  name="semestre_id" #semestre_id [(ngModel)] = "selectedSem" class="nopofavor">
-                <input matInput type="text"   name="cl_id"  #cl_id  [(ngModel)]= "selectedCl " class="nopofavor">
-                <input type="text" name="nada" [(ngModel)] = "selectedL" class="nopofavor">
-                <input matInput type="text"  placeholder="Titulo" name="titulo" #titulo  [(ngModel)] = "instrumento.titulo" required>
-                <input matInput type="text"  placeholder="Descripción"   name="descripcion" #descripcion [(ngModel)] = "instrumento.descripcion" required>
+
+                <input type="text" [value]="instrumento.instrumento_id" class="nopofavor">
+
+
+                <input matInput type="text"  formControlName="cl_id"  [(ngModel)]="instrumento.cl_id" class="nopofavor">
+                <input type="text"  formControlName="nada" [(ngModel)]="selectedL"  class="nopofavor">
+
+                <mat-form-field appearance="outline" style="width: 250px;">
+                  <mat-label>Titulo</mat-label>
+                  <input matInput type="text"  placeholder="Titulo" formControlName="titulo" [(ngModel)]="instrumento.titulo" required>
+                  <mat-error *ngIf="isValidField('titulo',instrumentoForm)">{{getErrorMessage("titulo")}}</mat-error>
+                </mat-form-field>
+
+                <br>
+
+
+                <mat-form-field appearance="outline" style="width: 600px;">
+                  <mat-label>Descripción</mat-label>
+                  <input matInput type="text"  placeholder="Descripción"  formControlName="descripcion" [(ngModel)]="instrumento.descripcion" required>
+                  <mat-error *ngIf="isValidField('descripcion', instrumentoForm)">{{getErrorMessage("descripcion")}}</mat-error>
+                </mat-form-field>
+               
+               <br>
   
                 <mat-form-field>
                   <mat-label>Ciclo</mat-label>
-                  <mat-select  name="utils_id" #utils_id [(ngModel)] = "instrumento.utils_id" >
+                  <mat-select formControlName="utils_id" [(ngModel)]="instrumento.utils_id">
                   <mat-option *ngFor = "let ciclo of ciclos" [value]= "ciclo.utils_id">
                     {{ciclo.utils_ciclo}}
                   </mat-option>
@@ -62,7 +79,7 @@
                 <!--input matInput type="text" name="utils_id" #utils_id [(ngModel)] = "instrumento.utils_id" class="nopofavor"-->
   
                 <mat-dialog-actions >
-                  <button mat-button matDialogClose="no">Cancel</button>
+                  <button mat-button matDialogClose="no" (click) ="resetAll(instrumentoForm)">Cancel</button>
                   <button type="submit" mat-button>Enviar</button>
               </mat-dialog-actions>
   
@@ -116,13 +133,13 @@
                 <div class="col m3 s12 center">
                   <div class="col m12 s6">
                     <div class="row">
-                      <a class="btn green darken-4" (click)= " getInstrumento(instrumento.instrumento_id) ; openDialog()" >Editar</a>
+                      <a class="btn amber darken-4" (click)= " getInstrumento(instrumento.instrumento_id) ; openDialog()" >Editar</a>
                     </div>
                   </div>
   
                   <div class="col m12 s6">
                     <div class="row">
-                      <a class="btn grey darken-4" [routerLink] = "['/instrumento',instrumento.instrumento_id]">Preguntas</a>
+                      <a class="btn grey darken-4" [routerLink] = "['/menu/instrumento',instrumento.instrumento_id]">Preguntas</a>
                     </div>
                   </div>
 

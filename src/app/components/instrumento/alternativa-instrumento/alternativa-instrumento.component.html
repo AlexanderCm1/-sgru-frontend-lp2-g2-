@@ -14,7 +14,7 @@
             <textarea name="nombre" class="materialize-textarea" placeholder="Alternativa"
             [ngClass]="alternativa.alternativa_id == alternativa.alternativa_id && statussClass? 'input-change-true':'input-change'" 
             name="nombre"
-             [(ngModel)] = "alternativa.nombre"> </textarea>
+             [(ngModel)] = "alternativa.nombre" > </textarea>
           </div>
 
           <div class="input-field col l2">
@@ -31,7 +31,7 @@
 
 
           <div class="col l1">
-            <a class="grey-text" style="cursor: pointer;" (click)="deleteAlternativa()">
+            <a class="red-text text-darken-3" style="cursor: pointer;" (click)="deleteAlternativa()">
               <mat-icon>delete</mat-icon>
               <i class="mdi mdi-delete small remove_icon"></i>
             </a>
@@ -39,7 +39,7 @@
 
 
           <div class="col l3 right">
-            <button  class="btn blue lighten-2" type="submit" *ngIf="statussClass">Enviar</button>
+            <button  class="btn amber darken-1" type="submit" *ngIf="statussClass">Enviar</button>
           </div>
 
 

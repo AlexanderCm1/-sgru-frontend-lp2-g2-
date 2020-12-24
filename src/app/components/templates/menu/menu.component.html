@@ -30,11 +30,11 @@
 			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu }" *ngIf= "isShowing || isExpanded" >
 				<img src="../../../assets/images/usuario.png" alt="">
 
-				<p>Bienvenida Sanny</p>
+				<p>Bienvenid@ {{authService.usuario.username}} </p>
+				<p>{{authService.usuario.nombre}} {{authService.usuario.apellidos}}</p>
 				<p>EP Sistemas</p>
-				<p>Semestre 2020-II</p>
 
-				<a mat-list-item href="...">Cerrar sesion</a>
+				
 
 
 				<mat-list-item (click)= "showSubSubMenu = !showSubSubMenu" class="parent">
@@ -49,6 +49,7 @@
 					<mat-list-item>Contraseña</mat-list-item>
 				</div>
 				
+				<a mat-list-item (click)="logout()">Cerrar sesion</a>
 			</div>
 
 
@@ -110,12 +111,15 @@
 				<mat-icon mat-list-icon>content_paste</mat-icon>
 				<mat-icon class="menu-button" [ngClass]= "{'rotated' : showSubmenu3}" *ngIf= "isExpanded3 || isShowing3">expand_more</mat-icon>
 			</mat-list-item>
-			<div  class="submenu"  [ngStyle]= "{'display': showSubmenu3 ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu3 }" *ngIf= "isShowing3 || isExpanded3" >
-				<a mat-list-item href="...">Avances de Proyecto Integrador</a>
+			<div  class="submenu" [ngStyle]= "{'display': showSubmenu3 ? 'block':''}" [ngClass]= "{'expanded' : showSubmenu3 }" *ngIf= "isShowing3 || isExpanded3">
+				<div *ngFor="let acceso of accesos">
+					<a mat-list-item routerLink="{{acceso.url}}">{{acceso.accessname}}</a>
+				</div>
+				<!--a mat-list-item href="...">Avances de Proyecto Integrador</a>
 				<a mat-list-item href="...">Evaluar Rubricas</a>
-				<a mat-list-item [routerLink] = "['/instrumento/create']">Examen de conocimientos</a>
-				<a mat-list-item href="...">Resultados de Evaluación</a>
-
+				<a mat-list-item [routerLink] = "['instrumento/create']">Examen de conocimientos</a>
+				<a mat-list-item [routerLink] = "['resultados']">Resultados de Evaluación</a-->
+				
 
 			</div>
 
@@ -141,6 +145,7 @@
 	</mat-sidenav>
     <mat-sidenav-content>
         <div class="container">
+			
             <router-outlet></router-outlet>
         
         </div>

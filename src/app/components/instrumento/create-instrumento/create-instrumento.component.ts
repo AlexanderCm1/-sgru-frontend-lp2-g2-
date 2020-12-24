@@ -12,7 +12,7 @@ import { InstrumentoService } from '../../../services/instrumento.service';
 
 import { MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import { MatFormFieldControl } from '@angular/material/form-field';
-import { NgForm } from '@angular/forms';
+import { NgForm,FormBuilder,Validators, FormGroup} from '@angular/forms';
 import Swal from 'sweetalert2'; 
 
 
@@ -56,6 +56,7 @@ export class CreateInstrumentoComponent implements OnInit {
   //solo para hacer el ng if 
   public cl_id:number;
 
+  instrumentoFormGroup:FormGroup;
 
   constructor
   (
@@ -64,7 +65,8 @@ export class CreateInstrumentoComponent implements OnInit {
     private _lineaService:LineaService,
     private _competenciaService:CompetenciasService,
     private _instrumentoService:InstrumentoService,
-    public dialog:MatDialog
+    public dialog:MatDialog,
+    private fb: FormBuilder
 
 
   ) { 
@@ -75,6 +77,16 @@ export class CreateInstrumentoComponent implements OnInit {
   ngOnInit(): void {
     this.getSemestres();
     this.getLineas(1);
+    this.instrumentoFormGroup = this.fb.group({
+      
+      cl_id:[''],
+      semestre_id:[''],
+      titulo:['', Validators.required],
+      descripcion:['', Validators.required],
+      utils_id:['', Validators.required],
+      nada : ['']
+  
+    });
   }
 
     /*obtener id en select LINEA*/
@@ -121,14 +133,17 @@ export class CreateInstrumentoComponent implements OnInit {
       )
     }
   
-    onSend(form: NgForm){  
+    onSend(form){  
       if(form.status === 'INVALID')
       {
         // display error in your form
       }else if(this.instrumento.instrumento_id == null){
           console.log(form.value);
-          this.instrumento = form.value;
-          console.log(this.instrumento);
+          this.instrumento.titulo = form.value.titulo;
+          this.instrumento.descripcion = form.value.descripcion;
+          this.instrumento.utils_id = form.value.utils_id;
+          // this.instrumento = form.value;
+          // console.log(this.instrumento);
           this._instrumentoService.createInstrumento(this.instrumento).subscribe(
             response =>{
 
@@ -149,7 +164,6 @@ export class CreateInstrumentoComponent implements OnInit {
   
           )
           form.reset();
-          this.semestre_id = null;
           this.linea_id = null;
           this.cl_id = null;
           this.dialog.closeAll();
@@ -173,7 +187,8 @@ export class CreateInstrumentoComponent implements OnInit {
           }
 
         )
-        form.reset();  
+        form.reset();
+        this.instrumento.instrumento_id = null;  
         this.dialog.closeAll();
       }
       
@@ -181,6 +196,8 @@ export class CreateInstrumentoComponent implements OnInit {
     resetAll(form){
       form.reset();
       this.instrumento.instrumento_id = null;
+      this.linea_id = null;
+      this.cl_id = null;
       this.dialog.closeAll();
     }
     deleteInstrumento(id){
@@ -321,5 +338,24 @@ export class CreateInstrumentoComponent implements OnInit {
       )
   
     }
+
+    getErrorMessage(field:string){
+      let message;
+      if (this.instrumentoFormGroup.get(field).errors.required){
+        message = "Necesitas rellenar este campos";
+      }
+
+      return message;
+
+    }
+
+    //validacion de errores
+    isValidField(field:string, form){
+      return ( 
+        
+        (this.instrumentoFormGroup.get(field).touched || this.instrumentoFormGroup.get(field).dirty || form.submitted)
+      && !this.instrumentoFormGroup.get(field).valid
+
+      )}
 
 }

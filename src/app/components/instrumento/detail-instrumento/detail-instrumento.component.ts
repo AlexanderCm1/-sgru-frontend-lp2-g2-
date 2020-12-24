@@ -12,7 +12,7 @@ import { AlternativaService } from '../../../services/alternativa.service';
 
 
 
-import { FormControl, NgForm, Validators,  FormBuilder, FormGroup  } from '@angular/forms';
+import { FormControl, NgForm, Validators,  FormBuilder, FormGroup, FormGroupDirective  } from '@angular/forms';
 
 import { Global } from '../../../services/global';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -36,7 +36,7 @@ export class DetailInstrumentoComponent implements OnInit {
   public pregunta: Pregunta;
   public preguntas: Pregunta[];
 
-  public alternativas:Alternativa[];
+  public alternativas:Alternativa[] = [];
   public alternativa:Alternativa;
 
 
@@ -50,16 +50,21 @@ export class DetailInstrumentoComponent implements OnInit {
 
 
   isLinear = false;
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+
+  isEditable = false;
 
 
   checked = false;
 
+  messageError:string = 'Campo requerido';
+
+
   public correcta_estado:string;
 
   @ViewChild('PreguntaDialog') PreguntaDialog: TemplateRef<any>;
-
 
 
   constructor(
@@ -92,12 +97,13 @@ export class DetailInstrumentoComponent implements OnInit {
       }
     )
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      nombre: ['', Validators.required],
+      peso:['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      nombre: ['', Validators.required],
+      correcta_estado:['']
     });
-
 
   }
 
@@ -111,7 +117,7 @@ export class DetailInstrumentoComponent implements OnInit {
 
 
   }
-  onSend(form: NgForm){  
+  onSend(form){  
     if(form.status === 'INVALID')
     {
       // display error in your form
@@ -150,18 +156,18 @@ export class DetailInstrumentoComponent implements OnInit {
     
   }
   
-  onSubmitAlternativa(form :NgForm){
+  onSubmitAlternativa(form,formDirective:FormGroupDirective){
     if(form.value.correcta_estado == true){
       this.alternativa.correcta_estado = 'Y'
     }else if(form.value.correcta_estado == false){
       this.alternativa.correcta_estado = 'N'
     }
     console.log(this.pregunta.pregunta_id);
-    this.alternativa.nombre = form.value.nombre
-    this.alternativa.pregunta_id = this.pregunta.pregunta_id;
-    console.log(this.alternativa)
 
     if(this.alternativa.alternativa_id == null){
+      this.alternativa.nombre = form.value.nombre
+      this.alternativa.pregunta_id = this.pregunta.pregunta_id;
+      console.log(this.alternativa)
       this._alternativaService.createAlternativa(this.alternativa).subscribe(
         response =>{
           console.log(response);
@@ -176,15 +182,23 @@ export class DetailInstrumentoComponent implements OnInit {
   
             }
           );
+          formDirective.resetForm();
+          form.reset();
+          this.messageError = 'Campo requerido';
         },
         error =>{
-  
+            this.messageError = 'No se puede enviar vacio';
+          //alert("eror al enviar tu webada "+ error);
         }
       )
+
     }
-    form.reset();
 
-
+    //formDirective.resetForm();
+    // this.secondFormGroup.reset;
+    // this.secondFormGroup.valid;
+    // this.isValidField2(this.alternativa.nombre,form);
+    
   }
   uploadAlternativa(id){
     this._preguntaService.getPregunta(id).subscribe(
@@ -206,23 +220,43 @@ export class DetailInstrumentoComponent implements OnInit {
     )
   }
   deleteAlternativa(id){
-    console.log(id);
-    this._alternativaService.deleteAlternativa(id).subscribe(
-      response =>{
-        console.log(response);
-        this._alternativaService.getAlternativas(this.pregunta.pregunta_id).subscribe(
-          ({alternativas})=>{
-            this.alternativas = alternativas;
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: "No podras revertir este cambio",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si,Eliminalo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(id);
+        this._alternativaService.deleteAlternativa(id).subscribe(
+          response =>{
+            Swal.fire(
+              'Eliminado!',
+              'Se elimino correctamente',
+              'success'
+            )
+            console.log(response);
+            this._alternativaService.getAlternativas(this.pregunta.pregunta_id).subscribe(
+              ({alternativas})=>{
+                this.alternativas = alternativas;
+              },
+              error =>{
+    
+              }
+            )
           },
           error =>{
-
+            console.log(error);
           }
         )
-      },
-      error =>{
-        console.log(error);
+       
       }
-    )
+    })
+
+ 
 
 
   }
@@ -268,7 +302,7 @@ export class DetailInstrumentoComponent implements OnInit {
     
  
   }
-  closeAll(form1:NgForm,form2:NgForm){
+  closeAll(form1,form2){
     form1.reset();
     form2.reset();
     this.pregunta.pregunta_id = null;
@@ -350,6 +384,21 @@ export class DetailInstrumentoComponent implements OnInit {
       }
     )
 
+  }
+  getErrorMessage(field:string){
+    let message;
+    if(this.firstFormGroup.get(field).errors.required){
+      message = "Se necesita rellenar";
+    }
+    return message;
+  }
+  isValidField(field: string, form):boolean{
+    return (this.firstFormGroup.get(field).touched || this.firstFormGroup.get(field).dirty || form.submitted ) 
+    && !this.firstFormGroup.get(field).valid
+  }
+  isValidField2(field: string, form):boolean{
+    return (this.secondFormGroup.get(field).touched || this.secondFormGroup.get(field).dirty || form.submitted || field == null) 
+    && !this.secondFormGroup.get(field).valid
   }
 
   /*

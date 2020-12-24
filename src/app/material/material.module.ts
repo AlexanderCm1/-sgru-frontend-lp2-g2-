@@ -15,6 +15,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+
+
+
 
 const MaterialComponents = 
 [ 
@@ -33,7 +40,11 @@ const MaterialComponents =
   MatDividerModule,
   MatSlideToggleModule,
   MatCheckboxModule,
-  MatStepperModule
+  MatStepperModule,
+  MatChipsModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule
   
 
 ];

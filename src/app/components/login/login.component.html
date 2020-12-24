@@ -1,0 +1,40 @@
+
+  <div class="bg-image"></div>
+
+<form class="box" [formGroup]= "loginFormGroup" #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
+        <h1>Login</h1>
+
+
+
+        <mat-form-field class="full-width">
+
+          <mat-label>Username</mat-label>
+
+          <input matInput type="text"  placeholder="Username" formControlName="username" required>
+          
+          <mat-error *ngIf="isValidField('username')"> {{getErrorMessage("username")}} </mat-error>
+        </mat-form-field>
+      
+        <mat-form-field class="full-width">
+          <mat-label>Password</mat-label>  
+          <input matInput [type]="hide ? 'password': 'text'" type="password" formControlName="password" placeholder="Password" required>
+
+          <button mat-icon-button matSuffix (click) ="hide = !hide;">
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          <mat-error *ngIf="isValidField('password')"> {{getErrorMessage("password")}} </mat-error>
+        </mat-form-field>
+      
+        <button [disabled]="loginFormGroup.invalid" type="submit" mat-raised-button class="boton">Login</button>
+
+
+    <!--h1>Login</h1>
+    <input type="text" [(ngModel)]="usuario.username" name="username" placeholder="Username">
+    <input type="password" [(ngModel)]="usuario.password" name="password" placeholder="Password">
+
+
+
+
+    <input type="submit" (click)='login()' value="Login"-->
+
+</form>

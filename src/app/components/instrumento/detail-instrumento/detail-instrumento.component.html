@@ -1,12 +1,19 @@
 <mat-list>
   <mat-card class="example-card">
+
+
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"><mat-icon>list_alt</mat-icon></div>
-      <mat-card-title *ngIf="instrumento"> <h1>{{instrumento.titulo}} </h1> </mat-card-title>
+      <mat-card-title> 
+        <h1 *ngIf="instrumento"> {{instrumento.titulo}} </h1> 
+          
+        
+      </mat-card-title>
     </mat-card-header>
    
     <mat-card-content>
-      <p *ngIf="instrumento">
+     
+      <p *ngIf="instrumento" class="left-align">
         {{instrumento.descripcion}}
       </p>
     </mat-card-content>
@@ -47,33 +54,142 @@
 
 
 <div class="fixed-action-btn">
-  <a class="btn-floating btn-large waves-effect waves-lightred blue lighten-2 pulse" (click)="openDialog()">
-    
+  <a class="btn-floating btn-large waves-effect waves-lightred red darken-4 pulse" (click)="openDialog()">
+    <mat-icon style="padding-top: 15px;">add</mat-icon>
   </a>
 </div>
 
 
-<ng-template #PreguntaDialog>
+<ng-template #PreguntaDialog >
+
+  
 
 <mat-dialog-content>
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+
+      <form [formGroup]="firstFormGroup" #preguntaForm="ngForm" (ngSubmit)="onSend(preguntaForm)">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field style="width: 300px;">
+          <mat-label>Pregunta</mat-label>
+          <input matInput formControlName="nombre" placeholder="Pregunta" [(ngModel)]="pregunta.nombre" required>
+          <mat-error *ngIf="isValidField('nombre',preguntaForm)">{{getErrorMessage("nombre")}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 100px;">
+
+
+          <mat-label>Peso</mat-label>
+          <input  matInput type="text" formControlName="peso" placeholder="peso"  [(ngModel)]="pregunta.peso" required>  
+          <mat-error *ngIf="isValidField('peso',preguntaForm)">{{getErrorMessage("peso")}}</mat-error>
+        </mat-form-field>
+        
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+
+      
+    </mat-step>
+    <mat-step>
+      <form [formGroup]="secondFormGroup" #alternativaForm="ngForm" (ngSubmit) ="onSubmitAlternativa(secondFormGroup,alternativaForm)">
+        <ng-template matStepLabel>Fill out your address</ng-template>
+
+        <mat-form-field appearance="outline" style="width: 280px;">
+          <mat-label>Alternativa</mat-label>
+          <input matInput type="text" formControlName="nombre"  placeholder="alternativa" > 
+          <mat-error *ngIf="isValidField2('nombre',alternativaForm)"> {{messageError}} </mat-error>
+        </mat-form-field>
+
+        <mat-checkbox class="example-margin" formControlName="correcta_estado">Pregunta correcta</mat-checkbox>
+        
+        <button type="submit" class="btn  amber darken-2" style="margin: 0 0 10px 10px;">Crear</button>
+      </form>
+
+      <app-alternativa-instrumento *ngFor="let alt of alternativas" (deleteClicked)="deleteAlternativa($event)" [alternativa] = "alt"></app-alternativa-instrumento>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext [disabled]="alternativas.length == 0">Next</button>
+        </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="closeAll(firstFormGroup,secondFormGroup)">Finalizar</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+
+</mat-dialog-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--mat-dialog-content >
   <!--button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
     {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-  </button-->
-  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+  </button>
+  <mat-horizontal-stepper   #stepper >
+
     <mat-step label="Crea tu pregunta">
-      <form #preguntaForm="ngForm" (ngSubmit)="onSend(preguntaForm)">
+      <form   #preguntaForm="ngForm" (ngSubmit)="onSend(preguntaForm)">
         <div class="row">
 
       
-          <div class="col l6">
-           
-            <input matInput type="text" placeholder="Pregunta" name="nombre" [(ngModel)]="pregunta.nombre" required>
-          
+          <div class="col l8">
+            <mat-form-field appearance="outline" style="width: 300px;">
+
+
+              <mat-label>Pregunta</mat-label>
+              <input matInput type="text" placeholder="Pregunta" name="nombre" [(ngModel)]="pregunta.nombre" required>
+
+              
+            </mat-form-field>
             
           </div>
+
+
+
     
-          <div class="col l6">
-            <input  matInput type="text" placeholder="peso" name="peso" [(ngModel)]="pregunta.peso" required>  
+          <div class="col l3">
+            <mat-form-field appearance="outline" style="width: 100px;">
+
+
+              <mat-label>Peso</mat-label>
+              <input  matInput type="text" placeholder="peso" name="peso" [(ngModel)]="pregunta.peso" required>  
+              
+            </mat-form-field>
+            
             
           </div>
          
@@ -87,26 +203,38 @@
         </div>
       </form>
     </mat-step>
+
+
+
     <mat-step [stepControl]="secondFormGroup" label="Añade las alternativas">
     <form>
+
+
         <form #sasaForm="ngForm" (ngSubmit) ="onSubmitAlternativa(sasaForm)">
+
+
           <div class="row">
-            <div class="col l8">
 
+            <div class="col l7">
 
-              <input matInput type="text"  placeholder="alternativa"  name="nombre" ngModel> 
+              <mat-form-field appearance="outline" style="width: 280px;">
+                <mat-label>Input</mat-label>
+                <input matInput type="text"  placeholder="alternativa"  name="nombre" ngModel> 
+              </mat-form-field>
+
             </div>
             
-            <div class="col l2">
-  
-              <mat-checkbox class="example-margin" ngModel name="correcta_estado">Pregunta correcta</mat-checkbox>
+            <div class="col l3">
+              <mat-checkbox class="example-margin" ngModel name="correcta_estado" required>Pregunta correcta</mat-checkbox>
             </div>
+
           </div>
 
        
           
 
-          <button type="submit" class="btn blue lighten-2" style="margin: 0 0 10px 10px;">Crear</button>
+          <button type="submit" class="btn  amber darken-2" style="margin: 0 0 10px 10px;">Crear</button>
+
         </form> 
 
         <app-alternativa-instrumento *ngFor="let alt of alternativas" (deleteClicked)="deleteAlternativa($event)" [alternativa] = "alt"></app-alternativa-instrumento>
@@ -128,45 +256,9 @@
     </mat-step>
   </mat-horizontal-stepper>
 
-</mat-dialog-content>
+</mat-dialog-content -->
 
 
-  <!--form #preguntaForm="ngForm" (ngSubmit)="onSend(preguntaForm)">
-  <h2 mat-dialog-title>Pregunta</h2>
-
-  <mat-dialog-content>
-    <div class="row">
-
-      
-      <div class="col l6">
-       
-        <input matInput type="text" placeholder="Pregunta" name="nombre" ngModel required >
-      
-        
-      </div>
-
-      <div class="col l6">
-        <input  matInput type="text" placeholder="peso" name="peso" ngModel required>  
-        
-      </div>
-     
-  
-    </div>
-  <mat-divider></mat-divider>
-  <h2 mat-dialog-title>Alternativas</h2>
-  
-
-  </mat-dialog-content>
-            
-  <mat-dialog-actions >
-      <button mat-button matDialogClose="no">Cancel</button>
-      <button type="submit" mat-button>Submit</button>
-  </mat-dialog-actions>
-
-
-  
-
-</form-->
 
 
 

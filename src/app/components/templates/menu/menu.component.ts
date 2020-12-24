@@ -1,10 +1,12 @@
 import { Component ,OnInit,ViewChild} from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+
 import { MatSidenav } from '@angular/material/sidenav';
-import { element } from 'protractor';
 import { Router,ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { Acceso } from '../../../models/acceso';
+import swal from 'sweetalert2';
+
+
 
 @Component({
   selector: 'app-menu',
@@ -12,6 +14,9 @@ import { Router,ActivatedRoute } from '@angular/router';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+
+
+
   opened = false;
   @ViewChild('sidenav') sidenav:MatSidenav;
   isExpanded = false;
@@ -48,15 +53,21 @@ export class MenuComponent implements OnInit {
 
   //route
   public ruta:any;
+  accesos:Acceso[];
+
+  user:any;
 
   constructor(
+    public authService:AuthService,
     private route:Router
   ){
-    this.ruta = this.route.url;
+    this.user= JSON.parse(sessionStorage.getItem('usuario'));
+     
   }
 
   ngOnInit(): void {
     console.log(this.route.url);
+    this.menu();
   }
   mouseenter() {
     if (!this.isExpanded) {
@@ -105,5 +116,19 @@ export class MenuComponent implements OnInit {
 
    //showSubmenu = !showSubmenu;
   }
+  logout():void{
+    let username = this.authService.usuario.username;
+    this.authService.logout();
+    swal.fire('Logout', `Hola ${username}, has cerrado sesión con éxito`, 'success')
+    this.route.navigate(['/']);
+
+  }
+  menu():void{
+    if(this.authService.isAuthenticated()){
+      this.accesos=this.user.accesos;
+      console.log(this.accesos);
+    }
+  }
+
 
 }
