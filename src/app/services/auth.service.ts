@@ -35,9 +35,9 @@ export class AuthService{
         return null;
     }
     login(usuario:Usuario):Observable<any>{
-    const urlEndpoint = 'https://proyecto-integrador-2020.herokuapp.com/oauth/token';
+    const urlEndpoint = 'http://localhost:9090/oauth/token';
 
-    const credenciales = btoa('bluekatie' + ':' + '123');
+    const credenciales = btoa('sgru' + ':' + 'OnlyShake');
 
     const httpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization':'Basic ' + credenciales});

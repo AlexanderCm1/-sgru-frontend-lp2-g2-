@@ -19,9 +19,9 @@ const routes:Routes = [
 
   //{path: 'menu', component: MenuComponent,canActivate:[AuthrutasGuard, RoleGuard], data:{role:'admin'}},
 
-  {path: 'instrumento/:id',component:DetailInstrumentoComponent,canActivate:[AuthrutasGuard, RoleGuard], data:{role:'admin'}},
+  {path: 'instrumento/:id',component:DetailInstrumentoComponent,canActivate:[AuthrutasGuard, RoleGuard], data:{role:'evaluador'}},
   
-  {path: 'instrumento/:id/alternativa/:id', component: AlternativaInstrumentoComponent,canActivate:[AuthrutasGuard, RoleGuard], data:{role:'admin'}},
+  {path: 'instrumento/:id/alternativa/:id', component: AlternativaInstrumentoComponent,canActivate:[AuthrutasGuard, RoleGuard], data:{role:'evaluador'}},
   {path: 'resultados', component:ResultadosComponent}
 ]
 

@@ -23,7 +23,7 @@ import { MenuComponent } from './components/templates/menu/menu.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/templates/dashboard/dashboard.component';
 import { ResultadosComponent } from './components/resultados/resultados.component';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -50,6 +50,7 @@ import { ResultadosComponent } from './components/resultados/resultados.componen
     MaterialModule,
     HttpClientModule,
     LayoutModule,
+    FlexLayoutModule,
     ToastrModule.forRoot()
     
   ],

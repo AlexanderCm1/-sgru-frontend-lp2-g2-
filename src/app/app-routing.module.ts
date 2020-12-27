@@ -7,6 +7,7 @@ import { DetailInstrumentoComponent } from './components/instrumento/detail-inst
 import { AlternativaInstrumentoComponent } from './components/instrumento/alternativa-instrumento/alternativa-instrumento.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/templates/menu/menu.component';
+import { DashboardComponent } from './components/templates/dashboard/dashboard.component';
 
 
 
@@ -22,7 +23,8 @@ const routes: Routes = [
 
   {path: 'login', component: LoginComponent},
   {path: '', pathMatch: 'full', redirectTo: 'login'},
-  
+  {path: 'dashboard', component:DashboardComponent},
+
   {
     path: 'menu', component: MenuComponent, children: [
       { path: '', loadChildren:()=> import('./components/templates/menu/menu.module').then(mod=>mod.MenuModule)  }
